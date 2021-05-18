@@ -12,7 +12,7 @@ steps:
       apiKey: '$(API_KEY)'
       veracodeAppProfile: 'VeraDemo'
       sandboxName: 
-      importType: 'All Unmitigated Flaws Violating Policy'
+      importType: 'All Unmitigated Flaws'
       workItemType: 'Bug'
       area: '$(system.teamProject)'
       flawImportLimit: '1000'
