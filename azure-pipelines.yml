@@ -1,0 +1,18 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: Veracode Flaw Importer@3
+    inputs:
+      ConnectionDetailsSelection: 'Credentials'
+      apiId: '$(API_ID)'
+      apiKey: '$(API_KEY)'
+      veracodeAppProfile: 'VeraDemo'
+      sandboxName: 
+      importType: 'All Unmitigated Flaws Violating Policy'
+      workItemType: 'Bug'
+      area: '$(system.teamProject)'
+      flawImportLimit: '1000'
