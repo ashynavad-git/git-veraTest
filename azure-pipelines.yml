@@ -28,4 +28,4 @@ steps:
       
       chmod 777 ./vcxcodepkg
       
-      ./vcxcodepkg
+      ./vcxcodepkg --dev --noui
