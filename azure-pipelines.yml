@@ -12,6 +12,7 @@ pool:
 steps:
 - task: Bash@3
   inputs:
+    targetType: 'inline'
     failOnStderr: true
     script: |
       curl -O https://tools.veracode.com/integrations/xcode/com.veracode.mobileapplicationpackager.dmg
