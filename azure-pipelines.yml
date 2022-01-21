@@ -7,16 +7,25 @@ trigger:
 - master
 
 pool:
-  vmImage: windows-latest
+  vmImage: macOS-latest
 
 steps:
-- task: PowerShell@2
-  displayName: 'Veracode SCA scan'
-  env: {SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)}
+- task: Bash@3
   inputs:
-   targetType: 'inline'
-   script: |
-    Set-ExecutionPolicy AllSigned -Scope Process -Force
-    $ProgressPreference = "SilentlyContinue"
-    iex ((New-Object System.Net.WebClient).DownloadString('https://download.srcclr.com/ci.ps1'))
-    srcclr scan $(Build.SourcesDirectory) --update-advisor
+    targetType: 'inline'
+    script: |
+      curl -O https://tools.veracode.com/integrations/xcode/com.veracode.mobileapplicationpackager.dmg
+      mkdir packager
+      7z x -opackager com.veracode.mobileapplicationpackager.dmg
+      
+      #hdiutil mount com.veracode.mobileapplicationpackager.dmg
+      
+      cd "packager/Veracode Mobile Application Packager/Veracode Mobile Application Packager.app/Contents/SharedSupport"
+      
+      #pwd; ls
+      
+      # Package the .xcarchive folder and place in artifact staging
+      
+      chmod 777 ./vcxcodepkg
+      
+      ./vcxcodepkg --version
