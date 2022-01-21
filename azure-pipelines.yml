@@ -15,7 +15,7 @@ steps:
     targetType: 'inline'
     failOnStderr: true
     script: |
-      curl -O https://tools.veracode.com/integrations/xcode/com.veracode.mobileapplicationpackager.dmg
+      curl -s -O https://tools.veracode.com/integrations/xcode/com.veracode.mobileapplicationpackager.dmg
       echo $?
       mkdir packager
       echo $?
