@@ -16,17 +16,24 @@ steps:
     failOnStderr: true
     script: |
       curl -O https://tools.veracode.com/integrations/xcode/com.veracode.mobileapplicationpackager.dmg
+      echo $?
       mkdir packager
+      echo $?
       7z x -opackager com.veracode.mobileapplicationpackager.dmg
+      echo $?
       
       #hdiutil mount com.veracode.mobileapplicationpackager.dmg
       
       cd "packager/Veracode Mobile Application Packager/Veracode Mobile Application Packager.app/Contents/SharedSupport"
+      echo $?
       
       #pwd; ls
       
       # Package the .xcarchive folder and place in artifact staging
       
       chmod 777 ./vcxcodepkg
+      echo $?
       
       ./vcxcodepkg --help
+      echo $?
+      
