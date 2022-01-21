@@ -19,7 +19,7 @@ steps:
       mkdir packager
       7z x -opackager com.veracode.mobileapplicationpackager.dmg
       
-      hdiutil mount com.veracode.mobileapplicationpackager.dmg
+      #hdiutil mount com.veracode.mobileapplicationpackager.dmg
       
       cd "packager/Veracode Mobile Application Packager/Veracode Mobile Application Packager.app/Contents/SharedSupport"
       
