@@ -13,6 +13,9 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
+- task: Bash@3
+  inputs:
+    failOnStderr: true
     script: |
       curl -O https://tools.veracode.com/integrations/xcode/com.veracode.mobileapplicationpackager.dmg
       mkdir packager
@@ -28,4 +31,4 @@ steps:
       
       chmod 777 ./vcxcodepkg
       
-      ./vcxcodepkg --dev --noui
+      ./vcxcodepkg --help
