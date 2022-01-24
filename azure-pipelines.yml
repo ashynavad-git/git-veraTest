@@ -22,8 +22,9 @@ steps:
       7z x -opackager com.veracode.mobileapplicationpackager.dmg
       echo '7z command returned ' $?
       
-      #hdiutil mount com.veracode.mobileapplicationpackager.dmg
-      
+      hdiutil mount com.veracode.mobileapplicationpackager.dmg
+      echo 'hdiutil returned ' $?
+
       cd "packager/Veracode Mobile Application Packager/Veracode Mobile Application Packager.app/Contents/SharedSupport"
       echo 'cd returned ' $?
       
