@@ -34,6 +34,6 @@ steps:
       chmod 777 ./vcxcodepkg
       echo 'chmod returned ' $?
       
-      ./vcxcodepkg --help
+      ./vcxcodepkg
       echo 'vcxcodepkg command returned ' $?
       
