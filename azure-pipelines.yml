@@ -35,6 +35,6 @@ steps:
       chmod 777 ./vcxcodepkg
       echo 'chmod returned ' $?
       
-      ./vcxcodepkg --noui --logfile=${{ Agent.WorkFolder }}
+      ./vcxcodepkg --noui --logfile=${{ System.DefaultWorkingDirectory	 }}
       echo 'vcxcodepkg command returned ' $?
       
