@@ -35,6 +35,6 @@ steps:
       chmod 777 ./vcxcodepkg
       echo 'chmod returned ' $?
       
-      ./vcxcodepkg --noui --logfile=/Users/runner/work/1/s
+      ./vcxcodepkg --noui --logfile=logfile.log
       echo 'vcxcodepkg command returned ' $?
       
