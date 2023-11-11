@@ -35,7 +35,7 @@ jobs:
         createsandbox: true
         canjobfail: true
         version: ${{ github.run_id }}
-        filepath: target/
+        filepath: target/*.jar
         sandboxname: Github-Sandbox
         debug: true
         vid: ${{secrets.VERACODE_API_ID}}
