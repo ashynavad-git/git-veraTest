@@ -45,8 +45,8 @@ jobs:
       run: |
         git clone https://github.com/veracode/veracode-python-hmac-example.git
         pip install -r veracode-python-hmac-example/requirements.txt
-        export VERACODE_API_KEY_ID=${{ secrets.VERACODE_API_ID}}}
-        export VERACODE_API_KEY_SECRET=${{ secrets.VERACODE_API_ID}}}
+        export VERACODE_API_KEY_ID=${{ secrets.VERACODE_API_ID}}
+        export VERACODE_API_KEY_SECRET=${{ secrets.VERACODE_API_ID}}
 
         ALL_BUILDS=$(http --auth-type veracode_hmac GET "https://analysiscenter.veracode.com/api/5.0/getbuildlist.do?app_id=$ID&sandbox_id=$SANDBOX_ID")
         BUILD_ID_1=$(echo "$ALL_BUILDS" | sed -n 's/.*build_id="\([0-9]*\)".*/\1/p' | tail -n 1)
