@@ -43,13 +43,13 @@ jobs:
         
     - name: Fetch Veracode Report
       env:
-          VERACODE_API_ID: '${{ secrets.VERACODE_API_ID }}'
-          VERACODE_API_SECRET: '${{ secrets.VERACODE_API_SECRET }}'
+          vid: '${{ secrets.VERACODE_API_ID }}'
+          vkey: '${{ secrets.VERACODE_API_SECRET }}'
       run: |
         git clone https://github.com/veracode/veracode-python-hmac-example.git
         pip install -r veracode-python-hmac-example/requirements.txt
-        export VERACODE_API_KEY_ID=${{ env.VERACODE_API_ID}}
-        export VERACODE_API_KEY_SECRET=${{ env.VERACODE_API_ID}}
+        export VERACODE_API_KEY_ID=${{ env.vid}}
+        export VERACODE_API_KEY_SECRET=${{ env.vkey}}
         ID="1845628"
         SANDBOX_ID="5655734"
         
