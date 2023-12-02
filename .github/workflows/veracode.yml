@@ -42,21 +42,18 @@ jobs:
         vkey: ${{secrets.VERACODE_API_KEY}}
         
     - name: Fetch Veracode Report
+      env:
+          VERACODE_API_ID: '${{ secrets.VERACODE_API_ID }}'
+          VERACODE_API_SECRET: '${{ secrets.VERACODE_API_SECRET }}'
       run: |
         git clone https://github.com/veracode/veracode-python-hmac-example.git
         pip install -r veracode-python-hmac-example/requirements.txt
-        export VERACODE_API_KEY_ID=${{ secrets.VERACODE_API_ID}}
-        export VERACODE_API_KEY_SECRET=${{ secrets.VERACODE_API_ID}}
-
-        ALL_BUILDS=$(http --auth-type veracode_hmac GET "https://analysiscenter.veracode.com/api/5.0/getbuildlist.do?app_id=$ID&sandbox_id=$SANDBOX_ID")
-        BUILD_ID_1=$(echo "$ALL_BUILDS" | sed -n 's/.*build_id="\([0-9]*\)".*/\1/p' | tail -n 1)
-        report_name_jar=Veracode_JAR_RESULTS_${{ env.PACKAGEID }}-${BUILD_ID_1}.pdf
-        echo "REPORT_NAME_2=$report_name_jar" >> $GITHUB_ENV
-        report_save_dir="$GITHUB_WORKSPACE/QA/packages/$TIMESTAMP/${{ matrix.directory }}"
-        git pull origin master
+        export VERACODE_API_KEY_ID=${{ env.VERACODE_API_ID}}
+        export VERACODE_API_KEY_SECRET=${{ env.VERACODE_API_ID}}
+        ID="1845628"
+        SANDBOX_ID="5655734"
         
-        http --auth-type veracode_hmac -o ${report_save_dir}/${report_name_jar} GET "https://analysiscenter.veracode.com/api/4.0/detailedreportpdf.do?build_id=$BUILD_ID_1"
-  
+        http --auth-type veracode_hmac GET "https://analysiscenter.veracode.com/api/5.0/getbuildlist.do?app_id=$ID&sandbox_id=$SANDBOX_ID"
 
 
         
