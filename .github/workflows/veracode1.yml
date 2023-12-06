@@ -27,16 +27,13 @@ jobs:
     - name: Build with Maven
       run: mvn package
   # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
-
-    - run: zip -r veracode-scan-target.zip ./
-    # download the Veracode Static Analysis Pipeline scan jar
-    - run: curl --silent --show-error --fail -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
-    - run: unzip -o pipeline-scan-LATEST.zip
-
-    - uses: actions/setup-java@v3
+    - name: pipeline-scan action step
+      id: pipeline-scan
+      uses: veracode/Veracode-pipeline-scan-action@v1.0.10
       with:
-        java-version: 8
-        distribution: 'temurin'
-    - run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --fail_on_severity="Very High, High" --file  target/verademo.war
-    continue-on-error: true
+          vid: ${{secrets.VERACODE_API_ID}}
+          vkey: ${{secrets.VERACODE_API_KEY}}
+          file: target/verademo.war 
+          veracode_policy_name: "Veracode Recommended High"
+          fail_build: true
       
