@@ -36,6 +36,7 @@ jobs:
           file: target/verademo.war 
           veracode_policy_name: "Veracode Recommended High"
           fail_build: false
+          Verabose: true
 
           
       
