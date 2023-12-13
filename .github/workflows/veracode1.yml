@@ -37,6 +37,7 @@ jobs:
           veracode_policy_name: "Veracode Recommended High"
           fail_build: false
           Verabose: true
-
+          ACTIONS_STEP_DEBUG: true
+          
           
       
