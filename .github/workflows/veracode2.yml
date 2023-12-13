@@ -1,1 +1,6 @@
+name: Veracode Static Pipeline Scan
+
+on:
+  workflow_dispatch
+
 
