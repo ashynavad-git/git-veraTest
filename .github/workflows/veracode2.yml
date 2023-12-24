@@ -2,7 +2,7 @@ name: Veracode SCA
 env:
   V_ID: ${{ secrets.VERACODE_API_ID }}
   V_KEY: ${{ secrets.VERACODE_API_KEY }}
-  SRCCLR_API_TOKEN: $(secrets.SRCCLR_API_TOKEN)
+  SRCCLR_API_TOKEN: ${{secrets.SRCCLR_API_TOKEN}}
 
 on:
   workflow_dispatch
