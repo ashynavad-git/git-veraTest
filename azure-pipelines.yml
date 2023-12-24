@@ -4,6 +4,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
 steps:
   - task: Veracode Flaw Importer@3
     inputs:
