@@ -10,16 +10,40 @@ pool:
   vmImage: windows-latest
 
 steps:
-- task: PowerShell@2
-  displayName: 'Veracode SCA scan'
-  env: {SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)}
+- task: Maven@4
   inputs:
-   targetType: 'inline'
-   script: |
-    Set-ExecutionPolicy AllSigned -Scope Process -Force
-    $ProgressPreference = "SilentlyContinue"
-    iex ((New-Object System.Net.WebClient).DownloadString('https://download.srcclr.com/ci.ps1'))
-    srcclr scan $(Build.SourcesDirectory) --update-advisor
+    mavenPomFile: 'app/pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testRunTitle: 'Test'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+- task: Veracode@3
+  inputs:
+    ConnectionDetailsSelection: 'Service Connection'
+    AnalysisService: 'vera_Azure'
+    veracodeAppProfile: '$(system.teamProject)'
+    version: '$(build.buildNumber)'
+    filepath: '$(System.DefaultWorkingDirectory)'
+    createProfile: true
+    importResults: true
+    failBuildIfUploadAndScanBuildStepFails: false
+    maximumWaitTime: '60'
+
+#steps:
+#- task: PowerShell@2
+#  displayName: 'Veracode SCA scan'
+#  env: {SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)}
+#  inputs:
+#   targetType: 'inline'
+#   script: |
+#    Set-ExecutionPolicy AllSigned -Scope Process -Force
+#    $ProgressPreference = "SilentlyContinue"
+#    iex ((New-Object System.Net.WebClient).DownloadString('https://download.srcclr.com/ci.ps1'))
+#    srcclr scan $(Build.SourcesDirectory) --update-advisor
 
 #- task: PowerShell@2
 #  inputs:
