@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: windows-latest
+  name: Default
 
 steps:
 - task: Maven@4
@@ -21,17 +21,18 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
-- task: Veracode@3
-  inputs:
-    ConnectionDetailsSelection: 'Service Connection'
-    AnalysisService: 'vera_Azure'
-    veracodeAppProfile: '$(system.teamProject)'
-    version: '$(build.buildNumber)'
-    filepath: '$(System.DefaultWorkingDirectory)'
-    createProfile: true
-    importResults: true
-    failBuildIfUploadAndScanBuildStepFails: false
-    maximumWaitTime: '60'
+    
+# - task: Veracode@3
+#   inputs:
+#     ConnectionDetailsSelection: 'Service Connection'
+#     AnalysisService: 'vera_Azure'
+#     veracodeAppProfile: '$(system.teamProject)'
+#     version: '$(build.buildNumber)'
+#     filepath: '$(System.DefaultWorkingDirectory)'
+#     createProfile: true
+#     importResults: true
+#     failBuildIfUploadAndScanBuildStepFails: false
+#     maximumWaitTime: '60'
 
 #steps:
 #- task: PowerShell@2
