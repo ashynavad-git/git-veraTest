@@ -26,7 +26,7 @@ steps:
     AnalysisService: 'vera_Azure'
     veracodeAppProfile: 'Azure'
     version: '$(build.buildNumber)'
-    filepath: '$(System.DefaultWorkingDirectory)'
+    filepath: 'app/verademo.war'
     optargs: '-autoscan false ' 
     createProfile: true
     importResults: true
