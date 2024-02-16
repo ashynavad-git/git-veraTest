@@ -27,7 +27,7 @@ steps:
     veracodeAppProfile: 'Azure'
     version: '$(build.buildNumber)'
     filepath: 'app/target/verademo.war'
-    optargs: '-autoscan false ' 
+    # optargs: '-autoscan false ' 
     createProfile: true
     importResults: true
     failBuildIfUploadAndScanBuildStepFails: false
