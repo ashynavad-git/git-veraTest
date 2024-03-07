@@ -64,7 +64,7 @@ steps:
     AnalysisService: 'Veracode'
     veracodeAppProfile: 'Myapp'
     version: 'Test1'
-    filepath: 'target/Verdemo.war'
+    filepath: 'app/target/Verdemo.war'
     sandboxName: 'Sandbox 1'
     createSandBox: true
     createProfile: true
