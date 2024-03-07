@@ -67,4 +67,7 @@ steps:
     filepath: '/Users/amitashokshynavad/myagent/_work/5/s/target/verademo.war'
     createProfile: false
     failBuildIfUploadAndScanBuildStepFails: true
+    importResults: true
     maximumWaitTime: '60'
+ 
+
