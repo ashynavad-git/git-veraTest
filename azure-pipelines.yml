@@ -62,11 +62,11 @@ steps:
   inputs:
     ConnectionDetailsSelection: 'Service Connection'
     AnalysisService: 'Veracode'
-    veracodeAppProfile: 'Myapp'
+    veracodeAppProfile: 'myapp'
     version: 'Test1'
     filepath: '/Users/amitashokshynavad/myagent/_work/5/s/target/verademo.war'
     sandboxName: 'Sandbox 1'
     createSandBox: true
-    createProfile: true
+    createProfile: false
     failBuildIfUploadAndScanBuildStepFails: true
     maximumWaitTime: '60'
