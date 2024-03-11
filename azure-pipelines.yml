@@ -20,6 +20,13 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
 
+- task: VeracodePipelineScan@0
+  inputs:
+    VeracodeAPIID: '$(vid)'
+    VeracodeAPIsecret: '$(vkey)'
+    fileToScan: 'app/target/verademo.war'
+
+
 # - task: Veracode@3
 #   inputs:
 #     ConnectionDetailsSelection: 'Service Connection'
@@ -58,16 +65,22 @@ steps:
 #    filepath: 'pipeline-scan.zip'
 #    maximumWaitTime: '360'
 
-- task: Veracode@3
-  inputs:
-    ConnectionDetailsSelection: 'Service Connection'
-    AnalysisService: 'Veracode'
-    veracodeAppProfile: 'myapp'
-    version: '$(build.buildNumber)'
-    filepath: '/Users/amitashokshynavad/myagent/_work/5/s/target/verademo.war'
-    createProfile: false
-    failBuildIfUploadAndScanBuildStepFails: true
-    importResults: true
-    maximumWaitTime: '60'
+# - task: Veracode@3
+#   inputs:
+#     ConnectionDetailsSelection: 'Service Connection'
+#     AnalysisService: 'Veracode'
+#     veracodeAppProfile: 'myapp'
+#     version: '$(build.buildNumber)'
+#     filepath: '/Users/amitashokshynavad/myagent/_work/5/s/target/verademo.war'
+#     createProfile: false
+#     failBuildIfUploadAndScanBuildStepFails: true
+#     importResults: true
+#     maximumWaitTime: '60'
  
 
+
+- task: VeracodePipelineScan@0
+  inputs:
+    VeracodeAPIID: '$(vid)'
+    VeracodeAPIsecret: '$(vkey)'
+    fileToScan: '$(System.DefaultWorkingDirectory)/verademo.war'
