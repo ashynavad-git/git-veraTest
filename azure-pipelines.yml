@@ -24,7 +24,8 @@ steps:
   inputs:
     VeracodeAPIID: '$(vid)'
     VeracodeAPIsecret: '$(vkey)'
-    fileToScan: 'app/target/verademo.war'
+    fileToScan: '/Users/amitashokshynavad/myagent/_work/2/s/target/verademo.war'
+
 
 
 # - task: Veracode@3
