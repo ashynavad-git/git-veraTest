@@ -35,7 +35,7 @@ steps:
     AnalysisService: 'vera_Azure'
     veracodeAppProfile: 'Vera&Test'
     version: '$(build.buildNumber)'
-    filepath: 'app/target/verademo.war'
+    filepath: '/Users/amitashokshynavad/myagent/_work/2/s/target/verademo.war'
     # optargs: '-autoscan false ' 
     createProfile: true
     importResults: true
