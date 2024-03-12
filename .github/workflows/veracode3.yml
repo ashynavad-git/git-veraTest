@@ -29,7 +29,7 @@ jobs:
     - name: Veracode Upload And Scan
       uses: veracode/veracode-uploadandscan-action@0.2.6
       with:
-        appname: 'PB Data Platform Microservice: (NAR ID: 168760-1) balances-history-ingest-dataflow'
+        appname: 'myapp'
         createprofile: true
         createsandbox: true
         canjobfail: true
