@@ -81,8 +81,8 @@ steps:
  
 
 
-- task: VeracodePipelineScan@0
-  inputs:
-    VeracodeAPIID: '$(vid)'
-    VeracodeAPIsecret: '$(vkey)'
-    fileToScan: '$(System.DefaultWorkingDirectory)/verademo.war'
+# - task: VeracodePipelineScan@0
+#   inputs:
+#     VeracodeAPIID: '$(vid)'
+#     VeracodeAPIsecret: '$(vkey)'
+#     fileToScan: '$(System.DefaultWorkingDirectory)/verademo.war'
