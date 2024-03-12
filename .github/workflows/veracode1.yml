@@ -35,7 +35,7 @@ jobs:
           vkey: ${{secrets.VERACODE_API_KEY}}
           file: target/verademo.war 
           veracode_policy_name: "Veracode Recommended High"
-          fail_build: false
+          # fail_build: false
           Verabose: true
           ACTIONS_STEP_DEBUG: true
           
