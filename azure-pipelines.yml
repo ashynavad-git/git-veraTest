@@ -25,7 +25,7 @@ steps:
     VeracodeAPIID: '$(vid)'
     VeracodeAPIsecret: '$(vkey)'
     fileToScan: '/Users/amitashokshynavad/myagent/_work/2/s/target/verademo.war'
-    policyName: 'Veracode Recommended Very High COPY'
+    policyName: 'Veracode Recommended Very High'
 
 
 
