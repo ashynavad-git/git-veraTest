@@ -20,27 +20,18 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
 
-- task: VeracodePipelineScan@0
+- task: Veracode@3
   inputs:
-    VeracodeAPIID: '$(vid)'
-    VeracodeAPIsecret: '$(vkey)'
-    fileToScan: '/Users/amitashokshynavad/myagent/_work/2/s/target/verademo.war'
-    policyName: 'Veracode Recommended High COPY'
-
-
-
-# - task: Veracode@3
-#   inputs:
-#     ConnectionDetailsSelection: 'Service Connection'
-#     AnalysisService: 'vera_Azure'
-#     veracodeAppProfile: 'Vera&Test'
-#     version: '$(build.buildNumber)'
-#     filepath: '/Users/amitashokshynavad/myagent/_work/2/s/target/verademo.war'
-#     # optargs: '-autoscan false ' 
-#     createProfile: true
-#     importResults: true
-#     failBuildIfUploadAndScanBuildStepFails: false
-#     maximumWaitTime: '60'
+    ConnectionDetailsSelection: 'Service Connection'
+    AnalysisService: 'vera_Azure'
+    veracodeAppProfile: 'Azure_vera integration'
+    version: '$(build.buildNumber)'
+    filepath: '/Users/amitashokshynavad/myagent/_work/2/s/target/verademo.war'
+    # optargs: '-autoscan false ' 
+    createProfile: true
+    importResults: true
+    failBuildIfUploadAndScanBuildStepFails: false
+    maximumWaitTime: '60'
 
 #steps:
 #- task: PowerShell@2
