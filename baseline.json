@@ -6843,41 +6843,6 @@
       },
       "stack_dumps": {},
       "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
-    },
-    {
-      "title": "java.sql.Statement.executeQuery",
-      "issue_id": 1019,
-      "image_path": "file:/tmp/tmpm7nkv74h/binary/verademo.veracodegen.vc.war.aes#zip:com/veracode/verademo/commands/IgnoreCommand",
-      "gob": "B",
-      "severity": 0,
-      "issue_type_id": "reliability",
-      "issue_type": "Improper Resource Shutdown or Release",
-      "cwe_id": "404",
-      "display_text": "\u003cspan\u003eThe program fails to release or incorrectly releases the variable result, which was previously allocated by a call to java.sql.Statement.executeQuery().\u003c/span\u003e \u003cspan\u003eEnsure that all code paths properly release this resource.\u003c/span\u003e \u003cspan\u003eReferences: \u003ca href\u003d\"https://cwe.mitre.org/data/definitions/404.html\"\u003eCWE\u003c/a\u003e\u003c/span\u003e",
-      "files": {
-        "source_file": {
-          "file": "com/veracode/verademo/commands/IgnoreCommand.java",
-          "line": 40,
-          "function_name": "execute",
-          "qualified_function_name": "com.veracode.verademo.commands.IgnoreCommand.execute",
-          "function_prototype": "void execute(java.lang.String)",
-          "scope": "com.veracode.verademo.commands.IgnoreCommand"
-        }
-      },
-      "flaw_match": {
-        "procedure_hash": "592522510",
-        "prototype_hash": "154563142",
-        "flaw_hash": "3392777041",
-        "flaw_hash_count": 1,
-        "flaw_hash_ordinal": 1,
-        "cause_hash": "1176028798",
-        "cause_hash_count": 1,
-        "cause_hash_ordinal": 1,
-        "cause_hash2": "0",
-        "cause_hash2_ordinal": "0"
-      },
-      "stack_dumps": {},
-      "flaw_details_link": "https://downloads.veracode.com/securityscan/cwe/v4/java/404.html"
     }
   ],
   "selected_modules": [],
