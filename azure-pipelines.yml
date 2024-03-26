@@ -33,7 +33,7 @@ steps:
 #     failBuildIfUploadAndScanBuildStepFails: false
 #     maximumWaitTime: '60'
 
-- task: PowerShell@2
+- task: Bash@3
   displayName: 'Veracode pipeline scan'
   inputs:
    targetType: 'inline'
