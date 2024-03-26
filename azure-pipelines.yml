@@ -40,7 +40,7 @@ steps:
    script: |
       curl -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
       unzip -o pipeline-scan-LATEST.zip
-      java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "app/target/verademo.war" 
+      java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "/Users/amitashokshynavad/myagent/_work/2/s/target/verademo.war" 
 
 #steps:
 #- task: PowerShell@2
