@@ -44,9 +44,9 @@ jobs:
     - name: wrapper
       run: |
         wget https://tools.veracode.com/integrations/API-Wrappers/Java/bin/VeracodeJavaAPI.zip  
-    - name: unzip
-      run: | 
-         unzip -o pipeline-scan-LATEST.zip
+    - uses: montudor/action-zip@v1
+      with:
+        args: unzip -qq VeracodeJavaAPI.zip -d dir
     - name: Run Pipeline Scanner
       run: -jar veracode-wrapper.jar -vid "${{secrets.VERACODE_API_ID}}" -vkey "${{secrets.VERACODE_API_KEY}}" -action DetailedReport -buildid 34427951 -outputfilepath /Users/amitashokshynavad/downloads/GitTest.pdf -format pdf
 
