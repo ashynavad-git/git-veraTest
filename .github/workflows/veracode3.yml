@@ -41,5 +41,14 @@ jobs:
         vid: ${{secrets.VERACODE_API_ID}}
         vkey: ${{secrets.VERACODE_API_KEY}}
 
- 
+    - name: Download the APi wrappers
+      uses: wei/curl@master
+      with:
+          VERACODE_WRAPPER_VERSION: -sS "https://search.maven.org/solrsearch/select?q=g:%22com.veracode.vosp.api.wrappers%22&rows=20&wt=json" | jq -r '.response.docs[0].latestVersion'
+          args: -o veracode-wrapper.jar "https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/${VERACODE_WRAPPER_VERSION}/vosp-api-wrappers-java-${VERACODE_WRAPPER_VERSION}.jar"
+    - name: Run Pipeline Scanner
+      run: -jar veracode-wrapper.jar -vid "${{secrets.VERACODE_API_ID}}" -vkey "${{secrets.VERACODE_API_KEY}}" -action DetailedReport -buildid 34427951 -outputfilepath /Users/amitashokshynavad/downloads/GitTest.pdf -format pdf
+
+
+
   
