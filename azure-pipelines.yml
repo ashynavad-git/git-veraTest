@@ -7,40 +7,51 @@ trigger:
 - master
 pool:
   name: Default
-steps:
-- task: Maven@4
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    testRunTitle: 'Test'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
 
-- task: Veracode@3
-  inputs:
-    ConnectionDetailsSelection: 'Service Connection'
-    AnalysisService: 'vera_Azure'
-    veracodeAppProfile: 'Azure_vera integration'
-    version: '$(build.buildNumber)'
-    filepath: '$(Build.ArtifactstagingDirectory)/Verademo.war'
-    # optargs: '-autoscan false ' 
-    createProfile: true
-    importResults: true
-    failBuildIfUploadAndScanBuildStepFails: false
-    maximumWaitTime: '60'
+stages:
+- stage: Build
+  jobs:
+  - job: Job_upload_scan 
+    steps:
+    - task: Maven@4
+      displayName: 'Maven package'
+      inputs:
+       mavenPomFile: 'pom.xml'
+       publishJUnitResults: true
+       testResultsFiles: '**/surefire-reports/TEST-*.xml'
+       testRunTitle: 'Test'
+       javaHomeOption: 'JDKVersion'
+       mavenVersionOption: 'Default'
+       mavenAuthenticateFeed: false
+       effectivePomSkip: false
+       sonarQubeRunAnalysis: false
 
-# - task: Bash@3
-#   displayName: 'Veracode pipeline scan'
-#   inputs:
-#    targetType: 'inline'
-#    script: |
-#       curl -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
-#       unzip -o pipeline-scan-LATEST.zip
-#       java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "/Users/amitashokshynavad/myagent/_work/2/s/target/verademo.war" --baseline_file "baseline.json" 
+    - task: Veracode@3
+      inputs:
+       ConnectionDetailsSelection: 'Service Connection'
+       AnalysisService: 'vera_Azure'
+       veracodeAppProfile: 'Azure_vera integration'
+       version: '$(build.buildNumber)'
+       filepath: '$(Build.ArtifactstagingDirectory)/Verademo.war'
+       # optargs: '-autoscan false ' 
+       createProfile: true
+       importResults: true
+       failBuildIfUploadAndScanBuildStepFails: false
+       maximumWaitTime: '60'
+
+  - job: pipeline
+    steps:
+    
+    - task: Bash@3
+      displayName: 'Veracode pipeline scan'
+      
+      inputs:
+       targetType: 'inline'
+       script: |
+          curl -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+          unzip -o pipeline-scan-LATEST.zip
+          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Build.ArtifactstagingDirectory)/Verademo.war" --baseline_file "baseline.json" 
+
 
 #steps:
 #- task: PowerShell@2
