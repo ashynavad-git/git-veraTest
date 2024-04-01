@@ -11,7 +11,7 @@ pool:
 stages:
 - stage: Build
   jobs:
-  - job: Job_upload_scan 
+  - job: UploadAndScan 
     steps:
     - task: Maven@4
       displayName: 'Maven package'
@@ -40,6 +40,7 @@ stages:
        maximumWaitTime: '60'
 
   - job: pipeline
+    dependsOn: UploadAndScan 
     steps:
     
     - task: Bash@3
