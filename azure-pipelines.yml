@@ -53,6 +53,18 @@ stages:
           unzip -o pipeline-scan-LATEST.zip
           java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Build.ArtifactstagingDirectory)/Verademo.war" --baseline_file "baseline.json" 
 
+- stage: 'Deploy_to_sca'
+  jobs:
+  - job: 'SCA_Agent' 
+    steps:
+     - task: Bash@3
+       displayName: 'Veracode SCA scan'
+       inputs:
+        targetType: 'inline'
+        script: |
+          export SRCCLR_API_TOKEN=$(SRCCLR_API_TOKEN)
+          curl -sSL https://download.sourceclear.com/ci.sh | sh
+    
 
 #steps:
 #- task: PowerShell@2
