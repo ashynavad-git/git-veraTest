@@ -48,7 +48,7 @@ jobs:
       with:
         args: unzip -qq VeracodeJavaAPI.zip -d dir
     - name: Run Pipeline Scanner
-      run: -jar veracode-wrapper.jar -vid "${{secrets.VERACODE_API_ID}}" -vkey "${{secrets.VERACODE_API_KEY}}" -action DetailedReport -buildid 34427951 -outputfilepath /Users/amitashokshynavad/downloads/GitTest.pdf -format pdf
+      run: -jar VeracodeJavaAPI.jar -vid "${{secrets.VERACODE_API_ID}}" -vkey "${{secrets.VERACODE_API_KEY}}" -action DetailedReport -buildid 34427951 -outputfilepath /Users/amitashokshynavad/downloads/GitTest.pdf -format pdf
 
 
 
