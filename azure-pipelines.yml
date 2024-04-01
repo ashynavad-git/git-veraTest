@@ -26,7 +26,7 @@ steps:
     AnalysisService: 'vera_Azure'
     veracodeAppProfile: 'Azure_vera integration'
     version: '$(build.buildNumber)'
-    filepath: '$(Build.ArtifactstagingDirectory)'
+    filepath: '$(Build.ArtifactstagingDirectory)/Verademo.war'
     # optargs: '-autoscan false ' 
     createProfile: true
     importResults: true
