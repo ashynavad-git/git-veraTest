@@ -17,14 +17,10 @@ stages:
       displayName: 'Maven package'
       inputs:
        mavenPomFile: 'pom.xml'
-       publishJUnitResults: true
-       testResultsFiles: '**/surefire-reports/TEST-*.xml'
-       testRunTitle: 'Test'
        javaHomeOption: 'JDKVersion'
        mavenVersionOption: 'Default'
        mavenAuthenticateFeed: false
        effectivePomSkip: false
-       sonarQubeRunAnalysis: false
 
     - task: Veracode@3
       inputs:
@@ -32,7 +28,7 @@ stages:
        AnalysisService: 'vera_Azure'
        veracodeAppProfile: 'Azure_vera integration'
        version: '$(build.buildNumber)'
-       filepath: '$(Build.ArtifactstagingDirectory)/Verademo.war'
+       filepath: '$(Build.DefaultworkingDirectory)/Verademo.war'
        # optargs: '-autoscan false ' 
        createProfile: true
        importResults: true
@@ -51,7 +47,7 @@ stages:
        script: |
           curl -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
           unzip -o pipeline-scan-LATEST.zip
-          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Build.ArtifactstagingDirectory)/Verademo.war" --baseline_file "baseline.json" 
+          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Build.DefaultworkingDirectory)/Verademo.war" --baseline_file "baseline.json" 
 
 - stage: 'Deploy_to_sca'
   jobs:
