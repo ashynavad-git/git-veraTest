@@ -22,14 +22,13 @@ stages:
        mavenAuthenticateFeed: false
        effectivePomSkip: false
     
-    - bash: ls -rt $(Build.SourcesDirectory)
-    - bash: echo $(Build.DefaultWorkingDirectory)
+    - bash: ls -rt '$(Build.SourcesDirectory)/target'
 
 
     - task: CopyFiles@2
       inputs:
        SourceFolder: '$(Build.SourcesDirectory)/target'
-       Contents: 'verademo.jar'
+       Contents: '*.jar'
        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 
