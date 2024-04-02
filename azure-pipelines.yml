@@ -21,24 +21,33 @@ stages:
        mavenVersionOption: 'Default'
        mavenAuthenticateFeed: false
        effectivePomSkip: false
+    
+    - bash: ls -rt $(Build.SourcesDirectory)
+    - bash: echo $(Build.DefaultWorkingDirectory)
+    
 
+    - task: CopyFiles@2
+      inputs:
+       SourceFolder: '$(Build.SourcesDirectory)/target'
+       Contents: '**/*.jar'
+       TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+
+  - job: pipeline
+    dependsOn: UploadAndScan 
+    steps:
     - task: Veracode@3
       inputs:
        ConnectionDetailsSelection: 'Service Connection'
        AnalysisService: 'vera_Azure'
        veracodeAppProfile: 'Azure_vera integration'
        version: '$(build.buildNumber)'
-       filepath: '$(Build.SourcesDirectory)/target/Verademo.war'
+       filepath: '$(Build.ArtifactStagingDirectory)/Verademo.war'
        # optargs: '-autoscan false ' 
        createProfile: true
        importResults: true
        failBuildIfUploadAndScanBuildStepFails: false
        maximumWaitTime: '60'
-
-  - job: pipeline
-    dependsOn: UploadAndScan 
-    steps:
-    
     - task: Bash@3
       displayName: 'Veracode pipeline scan'
       
@@ -47,7 +56,7 @@ stages:
        script: |
           curl -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
           unzip -o pipeline-scan-LATEST.zip
-          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Build.SourcesDirectory)/target/Verademo.war" --baseline_file "baseline.json" 
+          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Build.ArtifactStagingDirectory)/Verademo.war" --baseline_file "baseline.json" 
 
 - stage: 'Deploy_to_sca'
   jobs:
