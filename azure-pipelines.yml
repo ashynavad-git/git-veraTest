@@ -34,13 +34,17 @@ stages:
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'BUild_Artifact'
+        ArtifactName: 'Build_Artifact'
         publishLocation: 'Container'
 
   - job: Veracode
     dependsOn: UploadAndScan 
     steps:
     - bash: ls -rt '$(Build.ArtifactStagingDirectory)'
+    - bash: ls -rt '$(Pipeline.Workspace)'
+    
+    - download: current
+      artifact: Build_Artifact
     - task: Veracode@3
       displayName: 'upload and scan'
       inputs:
