@@ -29,7 +29,7 @@ stages:
     - task: CopyFiles@2
       inputs:
        SourceFolder: '$(Build.SourcesDirectory)/target'
-       Contents: '**/*.jar'
+       Contents: 'verademo.jar'
        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 
@@ -49,6 +49,7 @@ stages:
        importResults: true
        failBuildIfUploadAndScanBuildStepFails: false
        maximumWaitTime: '60'
+
     - task: Bash@3
       displayName: 'Veracode pipeline scan'
       inputs:
