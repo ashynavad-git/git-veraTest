@@ -24,7 +24,7 @@ stages:
     
     - bash: ls -rt $(Build.SourcesDirectory)
     - bash: echo $(Build.DefaultWorkingDirectory)
-    
+
 
     - task: CopyFiles@2
       inputs:
@@ -33,10 +33,11 @@ stages:
        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 
-  - job: pipeline
+  - job: Veracode
     dependsOn: UploadAndScan 
     steps:
     - task: Veracode@3
+      displayName: 'upload and scan'
       inputs:
        ConnectionDetailsSelection: 'Service Connection'
        AnalysisService: 'vera_Azure'
@@ -50,7 +51,6 @@ stages:
        maximumWaitTime: '60'
     - task: Bash@3
       displayName: 'Veracode pipeline scan'
-      
       inputs:
        targetType: 'inline'
        script: |
