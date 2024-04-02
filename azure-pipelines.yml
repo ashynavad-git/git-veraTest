@@ -40,7 +40,6 @@ stages:
   - job: Veracode
     dependsOn: UploadAndScan 
     steps:
-    - bash: ls -rt '$(Build.SourcesDirectory)/target'
     - bash: ls -rt '$(Build.ArtifactStagingDirectory)'
     - task: Veracode@3
       displayName: 'upload and scan'
