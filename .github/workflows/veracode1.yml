@@ -39,7 +39,6 @@ jobs:
          #  policy_file: "Veracode Recommended Very High COPY"
         #  veracode_policy_name: "Veracode Recommended High"
           fail_build: true
-          debug: 1
           
           
       
