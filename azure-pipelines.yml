@@ -24,7 +24,6 @@ stages:
     
     - bash: ls -rt '$(Build.SourcesDirectory)/target'
 
-
     - task: CopyFiles@2
       inputs:
        SourceFolder: '$(Build.SourcesDirectory)/target'
@@ -42,9 +41,12 @@ stages:
     steps:
     - bash: ls -rt '$(Build.ArtifactStagingDirectory)'
     - bash: ls -rt '$(Pipeline.Workspace)'
-    
-    - download: current
-      artifact: Build_Artifact
+
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        targetPath: '$(Pipeline.Workspace)'
+
     - task: Veracode@3
       displayName: 'upload and scan'
       inputs:
@@ -52,7 +54,7 @@ stages:
        AnalysisService: 'vera_Azure'
        veracodeAppProfile: 'Azure_vera integration'
        version: '$(build.buildNumber)'
-       filepath: '$(Build.ArtifactStagingDirectory)/Verademo.war'
+       filepath: '$(Pipeline.Workspace)'
        # optargs: '-autoscan false ' 
        createProfile: true
        importResults: true
@@ -66,7 +68,7 @@ stages:
        script: |
           curl -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
           unzip -o pipeline-scan-LATEST.zip
-          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Build.ArtifactStagingDirectory)/Verademo.war" --baseline_file "baseline.json" 
+          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Pipeline.Workspace)" --baseline_file "baseline.json" 
 
 - stage: 'Deploy_to_sca'
   jobs:
