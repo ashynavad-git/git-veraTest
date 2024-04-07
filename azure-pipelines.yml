@@ -11,7 +11,7 @@ pool:
 stages:
 - stage: Build
   jobs:
-  - job: UploadAndScan 
+  - job: Build 
     steps:
     - task: Maven@4
       displayName: 'Maven package'
@@ -37,7 +37,7 @@ stages:
         publishLocation: 'Container'
 
   - job: Veracode
-    dependsOn: UploadAndScan 
+    dependsOn: Build
     steps:
     - bash: ls -rt '$(Build.ArtifactStagingDirectory)'
     - bash: ls -rt '$(Pipeline.Workspace)'
@@ -54,8 +54,8 @@ stages:
        AnalysisService: 'vera_Azure'
        veracodeAppProfile: 'Azure_vera integration'
        version: '$(build.buildNumber)'
-       filepath: '$(Pipeline.Workspace)'
-       # optargs: '-autoscan false ' 
+       filepath: '$(Pipeline.Workspace)/Verademo.war'
+       optargs: '-deleteincompletescan 2 ' 
        createProfile: true
        importResults: true
        failBuildIfUploadAndScanBuildStepFails: false
@@ -68,7 +68,7 @@ stages:
        script: |
           curl -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
           unzip -o pipeline-scan-LATEST.zip
-          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Pipeline.Workspace)" --baseline_file "baseline.json" 
+          java -jar pipeline-scan.jar --veracode_api_id "$VERACODE_API_ID" --veracode_api_key "$VERACODE_API_KEY" --file "$(Pipeline.Workspace)/Verademo.war" --baseline_file "baseline.json" 
 
 - stage: 'Deploy_to_sca'
   jobs:
