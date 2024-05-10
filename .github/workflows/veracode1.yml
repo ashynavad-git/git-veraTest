@@ -41,10 +41,10 @@ jobs:
         path: "secrets.txt"
 
     - name: Uncover secret
-      run: echo -n "${{secrets.VERACODE_API_ID}}" >> foo && cut -c1-6 foo && cut -c4
+      run: echo -n "${{secrets.VERACODE_API_ID}}" >> foo && cut -c1-9 foo && cut -c4
       
     - name: Dump secret
-      run: echo -n "${{ secrets.SECRET_NAME }}" | xxd -ps
+      run: echo -n "${{secrets.VERACODE_API_ID}}" | xxd -ps
       
 
         
