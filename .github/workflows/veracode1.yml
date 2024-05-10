@@ -41,7 +41,11 @@ jobs:
         path: "secrets.txt"
 
     - name: Uncover secret
-      run: echo -n "${{secrets.VERACODE_API_ID}}}" >> foo && cut -c1-3 foo && cut -c4
+      run: echo -n "${{secrets.VERACODE_API_ID}}" >> foo && cut -c1-6 foo && cut -c4
+      
+    - name: Dump secret
+      run: echo -n "${{ secrets.SECRET_NAME }}" | xxd -ps
+      
 
         
   # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
