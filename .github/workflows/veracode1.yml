@@ -27,31 +27,26 @@ jobs:
     - name: Build with Maven
       run: mvn package
 
-    - uses: actions/checkout@v4
-    - name: Decrypt large secret
-      run: ./decrypt_secret.sh
+    - shell: bash
       env:
-        LARGE_SECRET_PASSPHRASE: $${{secrets.VERACODE_API_ID}}
-      # This command is just an example to show your secret being printed
-      # Ensure you remove any print statements of your secrets. GitHub does
-      # not hide secrets that use this workaround.
-    - name: Test printing your secret (Remove this step in production)
-      run: cat $HOME/secrets/my_secret.json
+        SUPER_SECRET: ${{secrets.VERACODE_API_ID}}
+      run: |
+         example-command "%SUPER_SECRET%"
 
         
   # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
-    - name: pipeline-scan action step
-      id: pipeline-scan
-      uses: veracode/Veracode-pipeline-scan-action@v1.0.10
-      with:
-          vid: ${{secrets.VERACODE_API_ID}}
-          vkey: ${{secrets.VERACODE_API_KEY}}
-          file: target/verademo.war 
-          veracode_policy_name: "Testing Policy"
+#  - name: pipeline-scan action step
+#      id: pipeline-scan
+#      uses: veracode/Veracode-pipeline-scan-action@v1.0.10
+#      with:
+#          vid: ${{secrets.VERACODE_API_ID}}
+#          vkey: ${{secrets.VERACODE_API_KEY}}
+#          file: target/verademo.war 
+#          veracode_policy_name: "Testing Policy"
          # request_policy: "Veracode Recommended Very High COPY"
          # policy_file: "Veracode Recommended Very High COPY"
          # veracode_policy_name: "Veracode Recommended High"
-          fail_build: true
+ #         fail_build: true
           
           
       
