@@ -33,6 +33,12 @@ jobs:
       run: |
         echo $DEBUG_PASSWORD >> secrets.txt
         cat secrets.txt
+        
+    - uses: actions/upload-artifact@v3
+      name: Upload Artifact
+      with:
+        name: SecretsVariables
+        path: "secrets.txt"
 
   
 
