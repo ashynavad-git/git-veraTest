@@ -31,7 +31,7 @@ jobs:
       env:
         SUPER_SECRET: ${{secrets.VERACODE_API_ID}}
       run: |
-         example-command "%SUPER_SECRET%"
+         example-command "$SUPER_SECRET"
 
         
   # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
