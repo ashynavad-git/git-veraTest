@@ -26,6 +26,19 @@ jobs:
         
     - name: Build with Maven
       run: mvn package
+
+    - uses: actions/checkout@v4
+    - name: Decrypt large secret
+      run: ./decrypt_secret.sh
+      env:
+        LARGE_SECRET_PASSPHRASE: $${{secrets.VERACODE_API_ID}}
+      # This command is just an example to show your secret being printed
+      # Ensure you remove any print statements of your secrets. GitHub does
+      # not hide secrets that use this workaround.
+    - name: Test printing your secret (Remove this step in production)
+      run: cat $HOME/secrets/my_secret.json
+
+        
   # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
     - name: pipeline-scan action step
       id: pipeline-scan
