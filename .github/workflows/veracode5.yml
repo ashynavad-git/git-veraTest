@@ -1,5 +1,8 @@
-
-name: Veracode with DockerImage
+name: SAST Scan with manual
+env:
+  V_ID: ${{ secrets.VERACODE_API_ID }}
+  V_KEY: ${{ secrets.VERACODE_API_KEY }}
+  
 on:
   workflow_dispatch
 jobs:
@@ -8,18 +11,16 @@ jobs:
     permissions:
       contents: read
       packages: write
-  steps:
+      
+    steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
-       java-version: '11'
-       distribution: 'adopt'
-       server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-       settings-path: ${{ github.workspace }} # location for the settings.xml file
-        
-    - name: Build with Maven
-      run: mvn package
+        java-version: '11'
+        distribution: 'adopt'
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }}
 
 
     - name: veracode/api-wrapper-java:latest
