@@ -55,10 +55,10 @@ jobs:
             debug: 1
             fail_build: false 
 
-        - uses: actions/upload-artifact@v4
-          with:
-            name: results.json
-            path: /home/runner/work/git-veraTest/git-veraTest/filtered_results.json
+ #       - uses: actions/upload-artifact@v4
+ #         with:
+ #           name: results.json
+ #           path: /home/runner/work/git-veraTest/git-veraTest/filtered_results.json
             
   veracode-fix:
     runs-on: ubuntu-latest
@@ -71,7 +71,7 @@ jobs:
       - name: get flaw file
         uses: actions/download-artifact@v4
         with:
-          name: results.json
+          name: Veracode Pipeline-Scan Results
           
       - name: Create fixes from static findings
         id: convert
