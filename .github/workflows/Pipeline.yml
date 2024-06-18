@@ -53,6 +53,10 @@ jobs:
             file: "verademo.war" 
             debug: 1
             fail_build: false 
+        - name: upload flaw file
+          uses: actions/upload-artifact@v4
+          with:
+            name: Veracode Pipeline-Scan Results
 
   veracode-fix:
     runs-on: ubuntu-latest
@@ -65,7 +69,7 @@ jobs:
       - name: get flaw file
         uses: actions/download-artifact@v4
         with:
-          name: "Veracode Pipeline-Scan Results" 
+          name: Veracode Pipeline-Scan Results
           
       - name: Create fixes from static findings
         id: convert
