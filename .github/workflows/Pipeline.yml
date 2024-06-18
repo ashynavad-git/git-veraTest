@@ -53,12 +53,7 @@ jobs:
             file: "verademo.war" 
             debug: 1
             fail_build: false 
-        - name: upload flaw file
-          uses: actions/upload-artifact@v4
-          with:
-            name: Veracode-Pipeline-Scan-Results
-            path: /Veracode-Pipeline-Scan-Results
-
+            
   veracode-fix:
     runs-on: ubuntu-latest
     needs: pipeline_scan
