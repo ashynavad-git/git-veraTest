@@ -1,5 +1,5 @@
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
-name: SAST Scan with manual
+name: SAST with Fix
 env:
   V_ID: ${{ secrets.VERACODE_API_ID }}
   V_KEY: ${{ secrets.VERACODE_API_KEY }}
