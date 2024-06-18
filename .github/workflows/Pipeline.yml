@@ -4,10 +4,12 @@ env:
   V_ID: ${{ secrets.VERACODE_API_ID }}
   V_KEY: ${{ secrets.VERACODE_API_KEY }}
   
+#on:
+#  pull_request:
+#    types:
+#      - opened
 on:
-  pull_request:
-    types:
-      - opened
+  workflow_dispatch
 
 jobs:
   build:
