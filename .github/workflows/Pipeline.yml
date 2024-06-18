@@ -87,4 +87,5 @@ jobs:
           prComment: true
           fixType: batch
           createPR: true
+          file: all
           
