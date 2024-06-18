@@ -58,7 +58,7 @@ jobs:
         - uses: actions/upload-artifact@v4
           with:
             name: results.json
-            path: /home/runner/work/git-veraTest/git-veraTest/results.json 
+            path: /home/runner/work/git-veraTest/git-veraTest/filtered_results.json
             
   veracode-fix:
     runs-on: ubuntu-latest
