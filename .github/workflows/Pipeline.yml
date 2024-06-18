@@ -76,19 +76,26 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: Veracode Pipeline-Scan Results
+
+      - name: ceeate fixes
+        run: |
+           export VERACODE_API_KEY_ID=${{ secrets.VERACODE_API_ID }}
+           export VERACODE_API_KEY_SECRET=${{ secrets.VERACODE_API_KEY }}
+           curl -fsS https://tools.veracode.com/veracode-cli/install | sh
+           ./veracode fix  ./src/main/java/com/veracode/verademo --type directory --results Veracode Pipeline-Scan Results
           
-      - name: Create fixes from static findings
-        id: convert
-        uses: Veracode/veracode-fix@main
-        with:
-          inputFile: filtered_results.json
-          vid: ${{ secrets.VERACODE_API_ID }}
-          vkey: ${{ secrets.VERACODE_API_KEY }}
-          source_base_path_1: "com/:java/com/veracode/verademo"
-          source_base_path_2: "WEB-INF:src/main/webapp/WEB-INF"
-          language: java
-          cwe: '117'
-          prComment: true
-          fixType: batch
-          file: all
+#      - name: Create fixes from static findings
+#        id: convert
+#        uses: Veracode/veracode-fix@main
+#        with:
+#          inputFile: filtered_results.json
+#          vid: ${{ secrets.VERACODE_API_ID }}
+#          vkey: ${{ secrets.VERACODE_API_KEY }}
+#          source_base_path_1: "com/:java/com/veracode/verademo"
+#          source_base_path_2: "WEB-INF:src/main/webapp/WEB-INF"
+#          language: java
+#          cwe: '117'
+#          prComment: true
+#          fixType: batch
+#          file: all
           
