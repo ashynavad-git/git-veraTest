@@ -30,7 +30,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: verademo.war
-        path: target/verademo.war
+        path: target/verademo.war  
         
   pipeline_scan:
       needs: build
@@ -52,11 +52,11 @@ jobs:
             vkey: ${{ secrets.VERACODE_API_KEY }}
             file: "verademo.war" 
             debug: 1
-            fail_build: false
-        - name: get flaw file
-          uses: actions/download-artifact@v4
+            fail_build: false 
+            
+        - uses: actions/upload-artifact@v4
           with:
-            name: Veracode Pipeline-Scan Results    
+            name: Veracode Pipeline-Scan Results
 
   veracode-fix:
     runs-on: ubuntu-latest
