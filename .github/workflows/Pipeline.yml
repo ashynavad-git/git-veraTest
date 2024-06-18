@@ -86,6 +86,5 @@ jobs:
           cwe: '89,117'
           prComment: true
           fixType: batch
-          createPR: true
           file: all
           
