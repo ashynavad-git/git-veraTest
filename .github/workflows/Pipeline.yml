@@ -5,7 +5,9 @@ env:
   V_KEY: ${{ secrets.VERACODE_API_KEY }}
   
 on:
-  workflow_dispatch
+  pull_request:
+    types:
+      - opened
 
 jobs:
   build:
