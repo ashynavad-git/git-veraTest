@@ -48,10 +48,9 @@ jobs:
           id: pipelien-scan
           uses: veracode/Veracode-pipeline-scan-action@v1.0.12
           with:
-            vid: ${{ secrets.VID }}
-            vkey: ${{ secrets.VKEY }}
+            vid: ${{ secrets.VERACODE_API_ID }}
+            vkey: ${{ secrets.VERACODE_API_KEY }}
             file: "verademo.war" 
-            request_policy: "VeraDemo Policy"
             debug: 1
             fail_build: false
 
@@ -73,8 +72,8 @@ jobs:
         uses: Veracode/veracode-fix@main
         with:
           inputFile: filtered_results.json
-          vid: ${{ secrets.VID }}
-          vkey: ${{ secrets.VKEY }}
+          vid: ${{ secrets.VERACODE_API_ID }}
+          vkey: ${{ secrets.VERACODE_API_KEY }}
           source_base_path_1: "com/:src/main/java/com/"
           source_base_path_2: "WEB-INF:src/main/webapp/WEB-INF"
           language: java
